@@ -50,13 +50,14 @@ def main():
     print("Hit enter to do that")
     input()
     for i in range(256):
-        print("Checking bit " + str(i))
         x = msg >> i & 1  # set x to the ith bit (either 1 or 0)
         pubkey_value = pubkey[x][i]
         signature_value = signature[i]
+        print("Bit " + str(i) + ": Checking that " + str(signature_value) + " hashes to " + pubkey_value)
         if hashlib.sha256(signature_value).hexdigest() != pubkey_value:
             print("BAD SIGNATURE!")
             return
+    print("")
     print("Signature is valid!")
     print("Hope you had fun. I sure did!")
 
